@@ -1,19 +1,29 @@
 const closeButton = document.querySelectorAll('.close');
 const modalWindow = document.querySelector('.modal');
 
-function showModal() {
-    if (localStorage.getItem("closeButton")) {
-        setTimeout(()=> {
-            modalWindow.style.display = "block";
-        }, 1000);
-        localStorage.setItem("closeButton", 1);
+const populLoad = 'popupLoad';
+ 
+function getPopupTime(popupLoad) {
+    let time = new Date().getTime();
+    if (localStorage.getItem(popupLoad)) {
+        time -= localStorage.getItem(popupLoad);
+        console.log(time);
+    } else {
+        localStorage.setItem(popupLoad, time);
     }
-};
-showModal();
+    return time;
+}
+
+if (getPopupTime(populLoad) > 60000) { 
+    setTimeout(() => {
+        document.getElementsByClassName("modal")[0].style.display = "block";
+    }, 1500)
+    localStorage.setItem(populLoad, new Date().getTime()); 
+}
 
 closeButton.forEach(close =>
     close.addEventListener('click', function() {
-        modalWindow.style.display = "none";
+    modalWindow.style.display = "none";
 }));
 
 const imagesUrl = [
