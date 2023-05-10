@@ -101,6 +101,7 @@ input {
     margin-right: 7px;
     outline: none;
     -webkit-appearance: none;
+    border-radius: 0;
 }
 
 .btn-style {
